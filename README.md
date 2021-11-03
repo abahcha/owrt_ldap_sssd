@@ -2,7 +2,7 @@
 
 ## Наводим порядок с пользователями в домашнем зоопарке с линуксами. С централизованным хранением учётных данных. 
 
-Схема: на двух рутерах (один, собственно, маршрутизирует траффик, а второй в роли точки доступа WiFi используется), поднимаются сервисы LDAP в режиме зеркалирования, а клиентские машины настраиваются на использование аутентификации через локальные сервисы SSSD с бэкендом на LDAP. Рутеры всё время находятся онлайн, в случае оффлайн используется кэш SSSD. Траффик LADP передаётся по зашифрованному каналу. 
+Схема: на двух рутерах (один, собственно, маршрутизирует траффик, а второй в роли точки доступа WiFi используется), поднимаются сервисы LDAP в режиме зеркалирования, клиентские машины настраиваются на использование аутентификации через локальные сервисы SSSD с бэкендом на LDAP. Рутеры всё время находятся онлайн, в случае нахождения клиентского устройства оффлайн используется кэш SSSD. Траффик LDAP передаётся по зашифрованному каналу. 
 
 ## План действий:
 
@@ -105,11 +105,11 @@ IP.1                = 192.168.1.126
 
 ## 3.а. устанавливаем и настраиваем OpenLDAP на router1 (router1, root):
 
-```
-opkg update && opkg install openldap-server libopenldap
-Правим [vi|nano] /etc/openldap/slapd.conf
-/etc/init.d/ldap start
-```
+`opkg update && opkg install openldap-server libopenldap`
+
+Правим `[vi|nano] /etc/openldap/slapd.conf`
+
+`/etc/init.d/ldap start`
 
 ## 3.б. наполняем базу ldap (PC, user):
 
@@ -286,8 +286,9 @@ password        required        pam_unix.so sha512 shadow nullok
 
 `ldapadd -Z -h router2.home.my -c -D "cn=admin,dc=home,dc=my" -w adminpass -f user.ldif`
 
-`cat user.ldif:`
 ```
+user@PC$ cat user.ldif
+
 dn: uid=testuser,ou=Hosehold,dc=home,dc=my
 sn: ТестоваяФамилия
 userPassword: {SSHA}Kz2Miwa3SCxC5GMzhIU6ZZ9v+tZ5C4AV
