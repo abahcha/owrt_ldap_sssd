@@ -1,0 +1,22 @@
+dn: uid=testuser,ou=Hosehold,dc=home,dc=my
+sn: ТестоваяФамилия
+userPassword: {SSHA}Kz2Miwa3SCxC5GMzhIU6ZZ9v+tZ5C4AV
+loginShell: /bin/bash
+uidNumber: 2001
+gidNumber: 2000
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+uid: testuser
+cn: ТестовоеИмя
+preferredLanguage: ru-RU
+homeDirectory: /home/testuser/
+
+dn: cn=testgroup,ou=Group, dc=home,dc=my
+gidNumber: 2000
+userPassword: {crypt}x
+memberUid: testuser
+memberUid: user
+objectClass: posixGroup
+objectClass: top
+cn: testgroup

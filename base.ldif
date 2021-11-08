@@ -1,0 +1,35 @@
+dn: dc=home,dc=my
+dc: home
+objectClass: dcObject
+objectClass: organization
+o: Home Sweet Home
+
+dn: cn=admin, dc=home,dc=my
+roleOccupant: dc=home,dc=my
+objectClass: organizationalRole
+objectClass: top
+description: LDAP administrator
+cn: admin
+
+dn: ou=Hosehold, dc=home,dc=my
+ou: Hosehold
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=Group, dc=home,dc=my
+ou: Group
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=Servou, dc=home,dc=my
+ou: Servou
+objectClass: top
+objectClass: organizationalUnit
+
+dn: cn=mirror,ou=Servou, dc=home,dc=my
+userPassword: {SSHA}pCICId17J9yDreUuTazymL/eYFbyneTl
+objectClass: simpleSecurityObject
+objectClass: organizationalPerson
+description: LDAP sync user
+sn: none
+cn: mirror
